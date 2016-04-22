@@ -11,8 +11,10 @@ class App extends React.Component {
       repos: [],
       resultRepos: [],
       placeholder: '',
+      foundRepo: null,
     };
     
+    this.onRepoSelect = this.onRepoSelect.bind(this);
     this.onSearch = this.onSearch.bind(this);
     this.loadRepos = this.loadRepos.bind(this);
   }
@@ -32,6 +34,16 @@ class App extends React.Component {
     this.setState({
       resultRepos: foundRepos,
       placeholder,
+    });
+  }
+  
+  onRepoSelect(repoId) {
+    const repo = this.state.repos.find(value => value.id === repoId);
+    
+    this.setState({
+      foundRepo: repo,
+      placeholder: '',
+      resultRepos: [],
     });
   }
 
@@ -56,8 +68,9 @@ class App extends React.Component {
             placeholder={this.state.placeholder}
             onSearch={this.onSearch}
             hints={hints}
+            onRepoSelect={this.onRepoSelect}
           />
-          <ShowResult repo={null} />
+          <ShowResult repo={this.state.foundRepo} />
         </div>
       </div>
     );
