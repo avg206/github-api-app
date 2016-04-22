@@ -13,15 +13,8 @@ class AutoComplete extends React.Component {
     document.addEventListener('keydown', this.onKeyDown, false);
   }
 
-
   componentWillUnmount() {
     document.removeEventListener('keydown', this.onKeyDown, false);
-  }
-  
-  onRepoClick(id) {
-    return () => {
-      this.props.onRepoSelect(id);
-    };
   }
   
   onKeyDown(e) {
@@ -30,13 +23,19 @@ class AutoComplete extends React.Component {
     }
   }
   
+  onRepoClick(id) {
+    return () => {
+      this.props.onRepoSelect(id);
+    };
+  }
+  
   render() {
     if (this.props.items.length === 0) {
       return null;
     }
     
     const items = this.props.items.map((value) => (
-      <a key={value.id} onClick={this.onRepoClick(value.id)} >
+      <a key={value.id} onClick={this.onRepoClick(value.id)} className="item" >
         <h4 className="ui header">{value.full_name} - {renderLanguage(value.language)}</h4>
         <p>{value.description}</p>
       </a>
