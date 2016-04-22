@@ -34,6 +34,7 @@ class SearchInput extends React.Component {
       </a>
     ));
     let autocomplete = '';
+    const inputPlaceholder = this.props.placeholder ? '' : 'Search repositories...';
     
     if (items.length) {
       autocomplete = (
@@ -50,7 +51,7 @@ class SearchInput extends React.Component {
             type="text"
             onChange={this.handleInputChange}
             value={this.state.search}
-            placeholder="Search repositories..."
+            placeholder={inputPlaceholder}
           />
           <input type="text" className="pseudo" value={this.props.placeholder} />
           
