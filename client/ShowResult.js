@@ -32,8 +32,6 @@ const ShowResult = (props) => {
   );
 };
 
-
-
 ShowResult.propTypes = {
   repo: React.PropTypes.object,
 };
