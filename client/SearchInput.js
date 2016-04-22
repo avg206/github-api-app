@@ -1,5 +1,5 @@
 import React from 'react';
-import renderLanguage from './utils/renderLanguage';
+import AutoComplete from './AutoComplete';
 
 class SearchInput extends React.Component {
   constructor(props) {
@@ -8,15 +8,13 @@ class SearchInput extends React.Component {
       search: '',
     };
     
-    this.onRepoClick = this.onRepoClick.bind(this);
+    this.onRepoSelect = this.onRepoSelect.bind(this);
     this.handleInputChange = this.handleInputChange.bind(this);
   }
   
-  onRepoClick(id) {
-    return () => {
-      this.setState({ search: '' });
-      this.props.onRepoSelect(id);
-    };
+  onRepoSelect(id) {
+    this.setState({ search: '' });
+    this.props.onRepoSelect(id);
   }
   
   handleInputChange(e) {
@@ -27,23 +25,8 @@ class SearchInput extends React.Component {
   }
   
   render() {
-    const items = this.props.hints.map((value) => (
-      <a key={value.id} onClick={this.onRepoClick(value.id)} className="item">
-        <h4 className="ui header">{value.full_name} - {renderLanguage(value.language)}</h4>
-        <p>{value.description}</p>
-      </a>
-    ));
-    let autocomplete = '';
     const inputPlaceholder = this.props.placeholder ? '' : 'Search repositories...';
-    
-    if (items.length) {
-      autocomplete = (
-        <div className="autocomplete ui vertical menu">
-          {items}
-        </div>
-      );
-    }
-    
+
     return (
       <div className="search-input">
         <div className="ui fluid input" data-label={this.props.groupName}>
@@ -55,7 +38,10 @@ class SearchInput extends React.Component {
           />
           <input type="text" className="pseudo" value={this.props.placeholder} />
           
-          {autocomplete}
+          <AutoComplete
+            items={this.props.hints}
+            onRepoSelect={this.onRepoSelect}
+          />
         </div>
       </div>
     );
