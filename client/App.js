@@ -8,9 +8,41 @@ class App extends React.Component {
     this.state = {
       groupUsername: 'reactjs',
       groupName: 'React Community',
+      repos: [],
+      resultRepos: [],
+      placeholder: '',
     };
+    
+    this.onSearch = this.onSearch.bind(this);
+    this.loadRepos = this.loadRepos.bind(this);
   }
 
+  componentDidMount() {
+    this.loadRepos();
+  }
+  
+  onSearch(text) {
+    const foundRepos = this.state.repos.filter((value) => value.full_name.indexOf(text) === 0);
+    let placeholder = '';
+    
+    if (foundRepos.length > 0) {
+      placeholder = foundRepos[0].full_name;
+    }
+    
+    this.setState({
+      resultRepos: foundRepos,
+      placeholder,
+    });
+  }
+
+  loadRepos() {
+    fetch(`https://api.github.com/users/${this.state.groupUsername}/repos`)
+      .then(respond => respond.json())
+      .then(respond => {
+        this.setState({ repos: respond });
+      });
+  }
+  
   render() {
     return (
       <div className="ui main text container">
@@ -19,7 +51,8 @@ class App extends React.Component {
           
           <SearchInput
             groupName={this.state.groupName}
-            placeholder="Search for repo..."
+            placeholder={this.state.placeholder}
+            onSearch={this.onSearch}
           />
           <ShowResult repo={null} />
         </div>
