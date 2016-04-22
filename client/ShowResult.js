@@ -9,6 +9,7 @@ const ShowResult = (props) => {
   if (props.repo === null) {
     return null;
   }
+  
   const data = [
     { label: 'Full Name:', value: props.repo.full_name },
     { label: 'Description:', value: props.repo.description },
