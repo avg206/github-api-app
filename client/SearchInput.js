@@ -12,12 +12,18 @@ class SearchInput extends React.Component {
   render() {
     return (
       <div className="search-input">
-        <div className="ui fluid input">
-          <input type="text" placeholder="Search..." />
+        <div className="ui fluid input" data-label={this.props.groupName}>
+          <input type="text" />
+          <input type="text" className="pseudo" defaultValue={this.props.placeholder} />
         </div>
       </div>
     );
   }
 }
+
+SearchInput.propTypes = {
+  groupName: React.PropTypes.string,
+  placeholder: React.PropTypes.string,
+};
 
 export default SearchInput;

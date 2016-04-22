@@ -17,7 +17,10 @@ class App extends React.Component {
         <div className="ui segment">
           <h2 className="center aligned">Search form</h2>
           
-          <SearchInput />
+          <SearchInput
+            groupName={this.state.groupName}
+            placeholder="Search for repo..."
+          />
           <ShowResult repo={null} />
         </div>
       </div>
