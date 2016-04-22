@@ -7,7 +7,7 @@ class App extends React.Component {
     super(props);
     this.state = {
       groupUsername: 'reactjs',
-      groupName: 'React Community',
+      groupName: '',
       repos: [],
       resultRepos: [],
       placeholder: '',
@@ -16,11 +16,11 @@ class App extends React.Component {
     
     this.onRepoSelect = this.onRepoSelect.bind(this);
     this.onSearch = this.onSearch.bind(this);
-    this.loadRepos = this.loadRepos.bind(this);
+    this.loadData = this.loadData.bind(this);
   }
 
   componentDidMount() {
-    this.loadRepos();
+    this.loadData();
   }
   
   onSearch(text) {
@@ -47,11 +47,17 @@ class App extends React.Component {
     });
   }
 
-  loadRepos() {
+  loadData() {
     fetch(`https://api.github.com/users/${this.state.groupUsername}/repos`)
       .then(respond => respond.json())
       .then(respond => {
         this.setState({ repos: respond });
+      });
+    
+    fetch(`https://api.github.com/users/${this.state.groupUsername}`)
+      .then(respond => respond.json())
+      .then(respond => {
+        this.setState({ groupName: respond.name });
       });
   }
   
