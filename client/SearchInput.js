@@ -1,4 +1,5 @@
 import React from 'react';
+import renderLanguage from './utils/renderLanguage';
 
 class SearchInput extends React.Component {
   constructor(props) {
@@ -28,7 +29,7 @@ class SearchInput extends React.Component {
   render() {
     const items = this.props.hints.map((value) => (
       <a key={value.id} onClick={this.onRepoClick(value.id)} className="item">
-        <h4 className="ui header">{value.full_name} - {value.language}</h4>
+        <h4 className="ui header">{value.full_name} - {renderLanguage(value.language)}</h4>
         <p>{value.description}</p>
       </a>
     ));

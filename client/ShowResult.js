@@ -1,4 +1,5 @@
 import React from 'react';
+import renderLanguage from './utils/renderLanguage';
 
 const formatLink = (link) => (
   <a href={link}>{link}</a>
@@ -11,7 +12,7 @@ const ShowResult = (props) => {
   const data = [
     { label: 'Full Name:', value: props.repo.full_name },
     { label: 'Description:', value: props.repo.description },
-    { label: 'Language:', value: props.repo.language },
+    { label: 'Language:', value: renderLanguage(props.repo.language) },
     { label: 'Link:', value: formatLink(props.repo.url) },
   ];
   
