@@ -18,11 +18,29 @@ class SearchInput extends React.Component {
   }
 
   render() {
+    const items = this.props.hints.map((value) => (
+      <a key={value.id} className="item">
+        <h4 className="ui header">{value.full_name} - {value.language}</h4>
+        <p>{value.description}</p>
+      </a>
+    ));
+    let autocomplete = '';
+    
+    if (items.length) {
+      autocomplete = (
+        <div className="autocomplete ui vertical menu">
+          {items}
+        </div>
+      );
+    }
+    
     return (
       <div className="search-input">
         <div className="ui fluid input" data-label={this.props.groupName}>
           <input type="text" onChange={this.handleInputChange} value={this.state.search} />
           <input type="text" className="pseudo" value={this.props.placeholder} />
+          
+          {autocomplete}
         </div>
       </div>
     );
@@ -32,6 +50,8 @@ class SearchInput extends React.Component {
 SearchInput.propTypes = {
   groupName: React.PropTypes.string,
   placeholder: React.PropTypes.string,
+  hints: React.PropTypes.array,
+  
   onSearch: React.PropTypes.func,
 };
 

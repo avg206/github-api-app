@@ -44,6 +44,8 @@ class App extends React.Component {
   }
   
   render() {
+    const hints = this.state.resultRepos.slice(0, 3);
+    
     return (
       <div className="ui main text container">
         <div className="ui segment">
@@ -53,6 +55,7 @@ class App extends React.Component {
             groupName={this.state.groupName}
             placeholder={this.state.placeholder}
             onSearch={this.onSearch}
+            hints={hints}
           />
           <ShowResult repo={null} />
         </div>
