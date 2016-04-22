@@ -36,10 +36,13 @@
     "run-sequence": "^1.1.5",
     "vinyl-source-stream": "^1.1.0"
   },
-  "babel" : {
-    "presets": ["es2015", "react"]
+  "babel": {
+    "presets": [
+      "es2015",
+      "react"
+    ]
   },
-  "eslintConfig" : {
+  "eslintConfig": {
     "env": {
       "jquery": true,
       "mocha": true
@@ -47,7 +50,12 @@
     "parser": "babel-eslint",
     "extends": "airbnb",
     "rules": {
-      "no-trailing-spaces": ["error", {"skipBlankLines": true}]
+      "no-trailing-spaces": [
+        "error",
+        {
+          "skipBlankLines": true
+        }
+      ]
     }
   }
 }
