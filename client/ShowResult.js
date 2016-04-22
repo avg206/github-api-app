@@ -14,7 +14,7 @@ const ShowResult = (props) => {
     { label: 'Full Name:', value: props.repo.full_name },
     { label: 'Description:', value: props.repo.description },
     { label: 'Language:', value: renderLanguage(props.repo.language) },
-    { label: 'Link:', value: formatLink(props.repo.url) },
+    { label: 'Link:', value: formatLink(props.repo.svn_url) },
   ];
   
   const rows = data.map((value) => (
